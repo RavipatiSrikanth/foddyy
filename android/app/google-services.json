@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1013045776349",
+    "project_id": "foddyy-6",
+    "storage_bucket": "foddyy-6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013045776349:android:0496975ab57d129cf77034",
+        "android_client_info": {
+          "package_name": "com.example.foddyy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1013045776349-1pj5tv4bdn1sf767ff8hgul0ms081gh6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARGQwKsYEzEa05MJX4HpoZZhdGLTaWB7c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1013045776349-1pj5tv4bdn1sf767ff8hgul0ms081gh6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
