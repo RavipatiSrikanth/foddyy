@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:foddyy/models/restaurant_model.dart';
 import 'package:foddyy/notifier/restaurant_notifier.dart';
+import 'package:foddyy/screens/google_map_page.dart';
 import 'package:foddyy/screens/products_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:provider/provider.dart';
@@ -119,12 +120,20 @@ class _HomePageState extends State<HomePage> {
       //backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: Text('L.B.Nagar'),
-        elevation: 0.0,
-        leading: Icon(
-          Icons.my_location,
-          color: Colors.black,
+        title: Text(
+          'L.B.Nagar',
+          style: TextStyle(color: Colors.black),
         ),
+        elevation: 0.0,
+        leading: IconButton(
+            icon: Icon(
+              Icons.my_location,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => GoogleMapPage()));
+            }),
         actions: [
           CircleAvatar(
             backgroundImage: AssetImage('images/aaru.png'),
@@ -189,9 +198,13 @@ class _HomePageState extends State<HomePage> {
                   onTap: () {
                     restaurantNotifier.currentRestaurant =
                         restaurantNotifier.restaurantList[index];
+                    print('restaurants');
+                    print(restaurantNotifier.restaurantList[index].name);
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return ProductsPage();
+                      return ProductsPage(
+                        rID: restaurantNotifier.currentRestaurant.id,
+                      );
                     }));
                   },
                   child: restaurantCard(
@@ -209,7 +222,7 @@ class _HomePageState extends State<HomePage> {
         color: Colors.grey[400],
         buttonBackgroundColor: Colors.white,
         animationCurve: Curves.easeInOut,
-        animationDuration: Duration(milliseconds: 600),
+        animationDuration: Duration(milliseconds: 300),
         key: _bottomNavigationKey,
         height: 50,
         index: 0,
@@ -249,7 +262,8 @@ class _HomePageState extends State<HomePage> {
     List<Restaurant> _restaurantList = [];
 
     snapshot.docs.forEach((element) {
-      Restaurant restaurant = Restaurant.fromMap(element.data());
+      Restaurant restaurant =
+          Restaurant.fromMap({...element.data(), 'id': element.id});
       _restaurantList.add(restaurant);
     });
     restaurantNotifier.restaurantList = _restaurantList;

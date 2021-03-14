@@ -1,5 +1,6 @@
 class Products {
-  String pid, pImage, pName, price, rid;
+  String pid, pImage, pName, rid;
+  int price;
 
   Products.fromMap(Map<String, dynamic> data) {
     pid = data['id'];
