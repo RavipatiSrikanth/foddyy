@@ -15,7 +15,7 @@ void main() async {
       ),
       ChangeNotifierProvider(
         create: (context) => ProductNotifier(),
-      )
+      ),
     ], child: MyApp()),
   );
 }

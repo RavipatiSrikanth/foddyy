@@ -5,10 +5,13 @@ import 'package:foddyy/models/products_model.dart';
 
 class ProductNotifier with ChangeNotifier {
   List<Products> _productsList = [];
+  List<Products> _baskets = [];
   Products _currentProduct;
 
   UnmodifiableListView<Products> get productsList =>
       UnmodifiableListView(_productsList);
+
+  List<Products> get baskets => _baskets;
 
   Products get currentProduct => _currentProduct;
 

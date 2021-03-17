@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:foddyy/notifier/products_notifier.dart';
+import 'package:provider/provider.dart';
 
 class ProductsCard extends StatefulWidget {
   final Function setViewCart;
@@ -33,6 +35,8 @@ class _ProductsCardState extends State<ProductsCard> {
 
   @override
   Widget build(BuildContext context) {
+    ProductNotifier productNotifier =
+        Provider.of<ProductNotifier>(context, listen: false);
     double deviceWidth = MediaQuery.of(context).size.width;
     double devicHeight = MediaQuery.of(context).size.height;
     return Card(
@@ -111,7 +115,7 @@ class _ProductsCardState extends State<ProductsCard> {
               Positioned(
                 child: Container(
                   margin: EdgeInsets.only(bottom: 10),
-                  width: deviceWidth * 0.32,
+                  width: deviceWidth * 0.33,
                   height: devicHeight * 0.15,
                   decoration: BoxDecoration(
                       image: DecorationImage(
@@ -126,12 +130,12 @@ class _ProductsCardState extends State<ProductsCard> {
                   onPressed: () {
                     widget.addToTotalItems();
                     widget.setViewCart();
-
                     setState(() {
-                      count++;
                       isVisible = true;
-                      itemCal();
+                      count++;
                     });
+
+                    itemCal();
                   },
                   color: Colors.red[50],
                   shape: RoundedRectangleBorder(
@@ -183,14 +187,17 @@ class _ProductsCardState extends State<ProductsCard> {
                             widget.setViewCart();
 
                             widget.deleteTotalItems();
-                            setState(() {
-                              if (count > 0) {
+
+                            if (count > 1) {
+                              count--;
+
+                              itemCal();
+                            } else {
+                              setState(() {
                                 count--;
-                                itemCal();
-                              } else {
                                 isVisible = false;
-                              }
-                            });
+                              });
+                            }
                           },
                           color: Colors.white,
                         ),

@@ -39,13 +39,24 @@ class _ProductsPageState extends State<ProductsPage> {
       setState(() {
         totalItems--;
       });
+    } else {
+      setState(() {
+        isViewCart = false;
+      });
     }
   }
 
   setViewCart() {
-    setState(() {
-      isViewCart = totalItems > 0 ? true : false;
-    });
+    print('total items: ' + totalItems.toString());
+    if (totalItems > 0) {
+      setState(() {
+        isViewCart = true;
+      });
+    } else {
+      setState(() {
+        isViewCart = false;
+      });
+    }
   }
 
   @override

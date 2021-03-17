@@ -6,6 +6,7 @@ import 'package:foddyy/notifier/restaurant_notifier.dart';
 import 'package:foddyy/screens/google_map_page.dart';
 import 'package:foddyy/screens/products_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:foddyy/widgets/restaurant_card_widget.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,82 +22,6 @@ class _HomePageState extends State<HomePage> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
         image: DecorationImage(image: NetworkImage(image), fit: BoxFit.cover),
-      ),
-    );
-  }
-
-  Widget restaurantCard({@required String name, @required String image}) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      elevation: 10,
-      child: Column(
-        children: [
-          Container(
-            width: 400,
-            height: 180,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(image),
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15))),
-          ),
-          Container(
-            width: 400,
-            height: 80,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(15),
-                    bottomRight: Radius.circular(15))),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      name,
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                    ),
-                    SizedBox(
-                      width: 1,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.star,
-                          color: Colors.red,
-                        ),
-                        Text(
-                          '4.0',
-                          style: TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          '/5',
-                          style: TextStyle(fontSize: 17),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text('Andhra, Biryani, North Indian'),
-                    SizedBox(
-                      width: 2,
-                    ),
-                    Text('₹250 for one'),
-                  ],
-                )
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -198,8 +123,6 @@ class _HomePageState extends State<HomePage> {
                   onTap: () {
                     restaurantNotifier.currentRestaurant =
                         restaurantNotifier.restaurantList[index];
-                    print('restaurants');
-                    print(restaurantNotifier.restaurantList[index].name);
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return ProductsPage(
@@ -207,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                       );
                     }));
                   },
-                  child: restaurantCard(
+                  child: RestaurantCard(
                       name: restaurantNotifier.restaurantList[index].name,
                       image: restaurantNotifier.restaurantList[index].image),
                 );
